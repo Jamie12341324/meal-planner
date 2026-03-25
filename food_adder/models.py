@@ -7,4 +7,3 @@ from django.contrib.auth.models import User
 
 class Food(models.Model):
     name = models.CharField(max_length=255)
-    
