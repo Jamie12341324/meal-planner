@@ -5,7 +5,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-<p>food add page</p>
+    {% for food in foods %}
+    {% if "placeholder" in food.featured_image.url %}
+        <img class="card-img-top" src="{% static 'images/fruit_bowl.jpg' %}"
+            alt="placeholder image">
+    {% else %}
+        <img class="card-img-top scale" src=" {{ food.featured_image.url }}"
+            alt="{{ food.name }}">
+    {% endif %}
+    <p>food add page {{ food.name }} </p>
+    {% endfor %}
 </body>
 {% endblock %}
 </html>
