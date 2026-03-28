@@ -5,7 +5,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
+    <div class="container">
+        <div class="row">
+            <div id="in_meal">
+                <p>List of foods in meal</p>
+            </div>
     {% for food in foods %}
+    <!-- col-12-4 from bootstrap -->    
+    <div class="col-xl-4">
     {% if "placeholder" in food.featured_image.url %}
         <img class="card-img-top" src="{% static 'images/fruit_bowl.jpg' %}"
             alt="placeholder image">
@@ -14,7 +21,14 @@
             alt="{{ food.name }}">
     {% endif %}
     <p>food add page {{ food.name }} </p>
+    <button type="button" id="{{ food.name }}" class="btn btn-success">Add</button>
+    </div>
     {% endfor %}
+        </div>
+    </div>
 </body>
+<!-- custom javascript -->
+<script src="../static/js/script.js"></script>
 {% endblock %}
+
 </html>
