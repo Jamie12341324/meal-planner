@@ -17,6 +17,7 @@ class Meal(models.Model):
 class Meal_Item(models.Model):
     meal = models.ForeignKey(Meal, on_delete=models.CASCADE, related_name="meal_name")
     food_code=models.CharField(max_length=20)
+    # IntegerField from stackoverflow
     mass=models.IntegerField(null=True) 
 
 class Food_Data(models.Model):

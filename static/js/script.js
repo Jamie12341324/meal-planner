@@ -21,6 +21,8 @@ document.addEventListener("DOMContentLoaded", function(){
                 let reference=things_in_meal.children[0];
                 reference.after(para);
                 let textarea = document.createElement("textarea");
+                // adding a name to a textarea put inside a p tag from AI so that all the food types can get used by the view
+                // to save the items to the database because textareas have a attribute of .name
                 textarea.name="example";
                 textarea.innerText=buttons[i].id.substr(3,buttons[i].id.length);
                 textarea.style.display="none";
@@ -37,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function(){
             _new=search(food2);
             if (_new!==true){
                 deleted=document.getElementById(food2);
+                // information on how to delete elements from mdn
                 deleted.remove();
             }
         });

@@ -9,6 +9,8 @@ from django.db.models import Q
 
 def my_hello(request):
     if request.method=="POST":
+        # getlist function was found looking at an AI and used to get the items in a meal that had just been created
+        # to help save information to the database
         L=len(request.POST.getlist("example"))
         c=0
         # meal_items=Meal_Item.objects.all().values()
@@ -26,6 +28,8 @@ def my_hello(request):
         meal.save()
         while c<L:
             meal_item=Meal_Item()
+            # getlist function was found looking at an AI and used to get the items in a meal that had just been created
+            # to help save information to the database
             meal_item.food_code=request.POST.getlist("example")[c]
             meal_item.mass=100
             meal_item.meal=meal

@@ -20,10 +20,12 @@
         <img class="card-img-top" src="{% static 'images/fruit_bowl.jpg' %}"
             alt="placeholder image">
     {% else %}
+        <!-- food.featured_image.url images are from pinterest -->
         <img class="card-img-top scale" src=" {{ food.featured_image.url }}"
             alt="{{ food.name }}">
     {% endif %}
     <p>food add page {{ food.name }} </p>
+    <!-- btn-success btn-danger classes from bootstrap used for add and delete buttons  -->
     <button type="button" id="add{{food.name}}" class="btn btn-success">Add</button>
     <button type="button" id="del{{food.name}}" class="btn btn-danger">Delete</button>
     </div>
