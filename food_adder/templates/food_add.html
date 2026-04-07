@@ -2,14 +2,17 @@
 {% load static %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
 <body>
     <div class="container">
         <div class="row">
+            <form action="" method="POST">
+            {% csrf_token %}
+            <label for="meal_name">meal name</label>
+            <input type="text" id="meal_name" name="meal_name">
             <div id="in_meal">
                 <p>List of foods in meal</p>
             </div>
+            <button type="submit">Go to meal page</button>
     {% for food in foods %}
     <!-- col-12-4 from bootstrap -->    
     <div class="col-xl-4">
@@ -21,9 +24,11 @@
             alt="{{ food.name }}">
     {% endif %}
     <p>food add page {{ food.name }} </p>
-    <button type="button" id="{{ food.name }}" class="btn btn-success">Add</button>
+    <button type="button" id="add{{food.name}}" class="btn btn-success">Add</button>
+    <button type="button" id="del{{food.name}}" class="btn btn-danger">Delete</button>
     </div>
     {% endfor %}
+    </form>
         </div>
     </div>
 </body>

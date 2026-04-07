@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<body>
+    <div class="container">
+        <div class="row">
+            <textarea>{{Meals}}</textarea>
+            <textarea>items:{{item_count}}, user:{{user_id}}{{meal_items}}</textarea>
+            {% for meal in Meals %}
+                <h2> {{ meal.name }}</h2>
+                <form action="" method="POST"></form>
+                {% for item in meal_items %}
+                    {% if meal.id == item.meal_id %}
+                        <h3> {{ item.food_code }} </h3>
+                        <label for="mass"> mass = </label>
+                        <!-- input type number from w3schools -->
+                        <!-- information on prepopulating input find using value= from AI copilot -->
+                        <input type="number" id="mass" name="mass"+{{meal.id}} value="{{item.mass}}">
+                    {% endif %}
+                {% endfor %}
+                <button type="submit">calculate new content</button>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+{% endblock %}

@@ -17,11 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from food_adder.views import my_hello
+from food_adder.views import start_meal
 # from food_adder.templates import food_add
 #from meal_planner.views import my_hello
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("accounts/", include("allauth.urls")),
     path('hello/', my_hello, name='greeting'),
+    path('edit_meal/', my_hello, name='start2'),
+    path('start_meal/', start_meal, name='start'),
     # path('food_add', food_add, name="food adder")
 ]
