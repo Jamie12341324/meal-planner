@@ -16,16 +16,21 @@ document.addEventListener("DOMContentLoaded", function(){
             }
             if (_new===true){
                 let para=document.createElement("p");
+                // information on how to use substr from w3schools
                 para.innerText=buttons[i].id.substr(3,buttons[i].id.length);
                 para.id=buttons[i].id.substr(3,buttons[i].id.length);
                 let reference=things_in_meal.children[0];
+                // inserting a tag after antoher from w3schools
                 reference.after(para);
+                // information used to pick textarea for holding information on foods from w3schools
                 let textarea = document.createElement("textarea");
                 // adding a name to a textarea put inside a p tag from AI so that all the food types can get used by the view
                 // to save the items to the database because textareas have a attribute of .name
                 textarea.name="example";
+                // information on how to use substr from w3schools
                 textarea.innerText=buttons[i].id.substr(3,buttons[i].id.length);
                 textarea.style.display="none";
+                // appendChild from w3schools
                 para.appendChild(textarea);
             }
         });

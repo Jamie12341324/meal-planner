@@ -13,6 +13,7 @@ def my_hello(request):
         # to help save information to the database
         L=len(request.POST.getlist("example"))
         c=0
+        # information on dictionaries from w3schools no longer used
         # meal_items=Meal_Item.objects.all().values()
         # L2=len(meal_items)
         # highest=0
@@ -49,6 +50,7 @@ def my_hello(request):
         }
         #template = loader.get_template('meal_edit.html')
         #return HttpResponse(template.render(context,request))
+        # information on passing context into a webpage found on w3schools
         return render(
            request,
            "meal_edit.html",
@@ -59,6 +61,7 @@ def my_hello(request):
         context = {
             "foods":foods
         }
+        # information on passing context into a webpage found on w3schools
         return render(
             request,
             "food_add.html",
@@ -72,6 +75,7 @@ def start_meal(request):
         meal_item.mass=100
         meal_item.save()
     else:
+        # information on passing context into a webpage found on w3schools
         foods=Food.objects.all().values()
         context = {
             "foods":foods
