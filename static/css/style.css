@@ -1,6 +1,20 @@
-body {
-    background-color: #F9FAFC;
+#padding1 {
+    margin-top:45px;
+    box-sizing: border-box;
 }
+.padding2{
+    max-width: 50px;
+}
+.background {
+    background-image: url(../images/fruit_bowl.jpg);
+    margin: auto;
+}
+/* body {
+    background-image: url(../images/fruit_bowl.jpg) ;
+} */
+/* body {
+    background-color: #F9FAFC;
+} */
 
 .brand {
     font-family: Lato, sans-serif;

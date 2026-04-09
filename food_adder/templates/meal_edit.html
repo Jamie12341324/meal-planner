@@ -5,21 +5,27 @@
 <body>
     <div class="container">
         <div class="row">
-            <textarea>{{Meals}}</textarea>
+            <!-- <textarea>{{Meals}}</textarea>
             <textarea>items:{{item_count}}, user:{{user_id}}{{meal_items}}</textarea>
-            {% for meal in Meals %}
+            {% for meal in Meals %} -->
+            <!-- col classes from bootstrap -->
+                <div class="col-xl-4 col-md-8 col-12 background">
                 <h2> {{ meal.name }}</h2>
                 <form action="" method="POST"></form>
                 {% for item in meal_items %}
                     {% if meal.id == item.meal_id %}
+                    <!-- <img class="card-img-top padding1" src="{% static 'images/fruit_bowl.jpg' %}"
+                    alt="placeholder image"> -->
                         <h3> {{ item.food_code }} </h3>
                         <label for="mass"> mass = </label>
                         <!-- input type number from w3schools -->
                         <!-- information on prepopulating input find using value= from AI copilot -->
-                        <input type="number" id="mass" name="mass"+{{meal.id}} value="{{item.mass}}">
+                        <input class="padding2" type="number" id="mass" name="mass"+{{meal.id}} value="{{item.mass}}">
                     {% endif %}
                 {% endfor %}
+                <br>
                 <button type="submit">calculate new content</button>
+            </div>
             {% endfor %}
         </div>
     </div>
