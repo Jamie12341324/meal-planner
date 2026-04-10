@@ -4,7 +4,8 @@ document.addEventListener("DOMContentLoaded", function(){
     for (let i=0; i<buttons.length; i++){
         buttons[i].addEventListener("click", function(){
             let things_in_meal=document.getElementById("in_meal");
-            let food=buttons[i].innerText;
+            let food=buttons[i].id.substr(3,buttons[i].id.length);;
+            alert(food)
             let c=0;
             let L=things_in_meal.children.length;
             var _new=true;

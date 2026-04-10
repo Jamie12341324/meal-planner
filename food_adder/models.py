@@ -20,7 +20,13 @@ class Meal_Item(models.Model):
     # food_data=models.ForeignKey(Food_Data, on_delete=models.CASCADE, related_name="Food_Data")
     # IntegerField from stackoverflow
     mass=models.IntegerField(null=True) 
-
+class Meal_contents(models.Model):
+    meal=models.CharField(max_length=255)
+    potassium=models.DecimalField(null=True, max_digits=11, decimal_places=2)
+    calcium=models.DecimalField(null=True, max_digits=11, decimal_places=2)
+    magnesium=models.DecimalField(null=True, max_digits=11, decimal_places=2)
+    sodium = models.DecimalField(null=True, max_digits=11, decimal_places=2)
+    energy_kcal = models.DecimalField(null=True, max_digits=11, decimal_places=2)
 class Food_Data(models.Model):
    food_code = models.CharField(max_length=20)
    food_name = models.CharField(max_length=100)

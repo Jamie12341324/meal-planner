@@ -6,8 +6,8 @@
     <div class="container">
         <div class="row">
             <!-- <textarea>{{Meals}}</textarea>
-            <textarea>items:{{item_count}}, user:{{user_id}}{{meal_items}}</textarea>
-            {% for meal in Meals %} -->
+            <textarea>items:{{item_count}}, user:{{user_id}}{{meal_items}}</textarea> -->
+            {% for meal in Meals %}
             <!-- col classes from bootstrap -->
                 <div class="col-xl-4 col-md-8 col-12 background">
                 <h2> {{ meal.name }}</h2>
@@ -18,6 +18,10 @@
                     alt="placeholder image"> -->
                         <h3> {{ item.food_code }} </h3>
                         <label for="mass"> mass = </label>
+                        {% for food_data in food_datas %}
+                            {% if food_data.food_code==item.food_code %}
+                            {% endif %}
+                        {% endfor %}
                         <!-- input type number from w3schools -->
                         <!-- information on prepopulating input find using value= from AI copilot -->
                         <input class="padding2" type="number" id="mass" name="mass"+{{meal.id}} value="{{item.mass}}">

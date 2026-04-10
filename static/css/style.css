@@ -8,6 +8,7 @@
 .background {
     background-image: url(../images/fruit_bowl.jpg);
     margin: auto;
+    min-height: 500px;
 }
 /* body {
     background-image: url(../images/fruit_bowl.jpg) ;

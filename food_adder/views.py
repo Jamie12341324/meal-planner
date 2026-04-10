@@ -3,10 +3,14 @@ from django.http import HttpResponse
 from .models import Food
 from .models import Meal_Item
 from .models import Meal
+from .models import Food_Data
 from django.template import loader
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
+@login_required(login_url="/accounts/login/")
 def my_hello(request):
     if request.method=="POST":
         # getlist function was found looking at an AI and used to get the items in a meal that had just been created
@@ -42,11 +46,13 @@ def my_hello(request):
         meal_items=Meal_Item.objects.filter(Q(meal__user_id=request.user.id)).values()
         item_count = meal_items.count
         Meals=Meal.objects.filter(Q(user_id=request.user.id)).values()
+        food_datas=Food_Data.objects.all().values()
         context={
             'user_id':request.user.id,
             'Meals':Meals,
             'meal_items':meal_items,
             'item_count':item_count,
+            'food_data':food_datas,
         }
         #template = loader.get_template('meal_edit.html')
         #return HttpResponse(template.render(context,request))
