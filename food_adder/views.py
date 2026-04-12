@@ -4,6 +4,7 @@ from .models import Food
 from .models import Meal_Item
 from .models import Meal
 from .models import Food_Data
+from .models import Meal_contents
 from django.template import loader
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
@@ -12,7 +13,14 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url="/accounts/login/")
 def my_hello(request):
-    if request.method=="POST":
+    Meals=Meal.objects.filter(Q(user_id=request.user.id)).values()
+    L2=len(Meals)
+    c2=0
+    array=[]
+    while c2<L2:
+        array.append(Meals[c2]["name"])
+        c2=c2+1
+    if request.method=="POST" and request.POST.get("meal_name") not in array:
         # getlist function was found looking at an AI and used to get the items in a meal that had just been created
         # to help save information to the database
         L=len(request.POST.getlist("example"))
@@ -45,14 +53,28 @@ def my_hello(request):
             c=c+1
         meal_items=Meal_Item.objects.filter(Q(meal__user_id=request.user.id)).values()
         item_count = meal_items.count
+        #
+        food_list=[]
+        food_list.append(5526)
         Meals=Meal.objects.filter(Q(user_id=request.user.id)).values()
-        food_datas=Food_Data.objects.all().values()
+        food_datas=Food_Data.objects.filter(id__in=food_list).values()
+        #
+        meal_contents0=Meal_contents()
+        meal_contents0.meal=meal.name
+        meal_contents0.potassium=meal_item.mass*food_datas[0]["potassium"]/100000
+        meal_contents0.calcium=meal_item.mass*food_datas[0]["calcium"]/100000
+        meal_contents0.magnesium=meal_item.mass*food_datas[0]["magnesium"]/100000
+        meal_contents0.sodium=meal_item.mass*food_datas[0]["sodium"]/100000
+        meal_contents0.energy_kcal=meal_item.mass*food_datas[0]["energy_kcal"]/100
+        meal_contents0.save()
+        meal_contents=Meal_contents.objects.all().values()
         context={
             'user_id':request.user.id,
             'Meals':Meals,
             'meal_items':meal_items,
             'item_count':item_count,
             'food_data':food_datas,
+            'meal_contents':meal_contents,
         }
         #template = loader.get_template('meal_edit.html')
         #return HttpResponse(template.render(context,request))

@@ -18,13 +18,23 @@
                     alt="placeholder image"> -->
                         <h3> {{ item.food_code }} </h3>
                         <label for="mass"> mass = </label>
-                        {% for food_data in food_datas %}
-                            {% if food_data.food_code==item.food_code %}
-                            {% endif %}
-                        {% endfor %}
                         <!-- input type number from w3schools -->
                         <!-- information on prepopulating input find using value= from AI copilot -->
                         <input class="padding2" type="number" id="mass" name="mass"+{{meal.id}} value="{{item.mass}}">
+                        
+                    {% endif %}
+                {% endfor %}
+                {% for meal_content in meal_contents %}
+                    {% if meal.name == meal_content.meal %}
+                        <p>mass of potassium = {{ meal_content.potassium }} grams</p>
+                        <br>
+                        <p>mass of calcium = {{ meal_content.calcium }} grams</p>
+                        <br>
+                        <p>mass of magnesium = {{ meal_content.magnesium }} grams</p>
+                        <br>
+                        <p>mass of sodium = {{ meal_content.sodium }} grams</p>
+                        <br>
+                        <p>energy  = {{ meal_content.energy_kcal }} kcal</p>
                     {% endif %}
                 {% endfor %}
                 <br>
