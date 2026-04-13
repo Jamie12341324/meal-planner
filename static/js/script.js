@@ -1,4 +1,17 @@
 document.addEventListener("DOMContentLoaded", function(){
+    let button1=document.getElementById("meal_name_button");
+    button1.addEventListener("click", function(){
+        let names=document.getElementsByClassName("meal_names");
+        let current_name=document.getElementById("meal_name");
+        let i3=0;
+        while (i3<names.length){
+            // .value from Bing AI
+            if (names[i3].innerText==current_name.value){
+                alert("There is already a meal with that name pick a different name");
+            }
+            i3=i3+1;
+        }
+    })
     let buttons=document.getElementsByClassName("btn-success");
     console.log("hello");
     for (let i=0; i<buttons.length; i++){

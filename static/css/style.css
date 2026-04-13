@@ -10,6 +10,10 @@
     margin: auto;
     min-height: 500px;
 }
+.meal_names{
+    /* dispaly none from w3schools */
+    display: none;
+}
 /* body {
     background-image: url(../images/fruit_bowl.jpg) ;
 } */

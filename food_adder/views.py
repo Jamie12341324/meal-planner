@@ -86,8 +86,10 @@ def my_hello(request):
         )
     else:
         foods=Food.objects.all().values()
+        meals=Meal.objects.all().values()
         context = {
-            "foods":foods
+            "foods":foods,
+            "meals":meals,
         }
         # information on passing context into a webpage found on w3schools
         return render(
