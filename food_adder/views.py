@@ -20,7 +20,7 @@ def my_hello(request):
     while c2<L2:
         array.append(Meals[c2]["name"])
         c2=c2+1
-    if request.method=="POST" and request.POST.get("meal_name") not in array:
+    if request.method=="POST" and request.POST.get("meal_name") not in array and len(request.POST.getlist("action"))==0:
         # getlist function was found looking at an AI and used to get the items in a meal that had just been created
         # to help save information to the database
         L=len(request.POST.getlist("example"))
@@ -110,6 +110,20 @@ def start_meal(request):
         context = {
             "foods":foods
         }
+        return render(
+            request,
+            "food_add.html",
+            context
+        )
+def my_view_name(request):
+    if request.method=="POST":
+        foods=Food.objects.all().values()
+        meals=Meal.objects.all().values()
+        context = {
+            "foods":foods,
+            "meals":meals,
+        }
+        # information on passing context into a webpage found on w3schools
         return render(
             request,
             "food_add.html",

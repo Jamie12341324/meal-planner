@@ -10,8 +10,10 @@
             {% for meal in Meals %}
             <!-- col classes from bootstrap -->
                 <div class="col-xl-4 col-md-8 col-12 background">
-                <h2> {{ meal.name }}</h2>
-                <form action="" method="POST"></form>
+                <!-- action=my_view from bing AI -->
+                <form action="{% url 'my_view' %}" method="POST">
+                {% csrf_token %}
+                <h2 name="meal_name"+{{meal.id}}> {{ meal.name }}</h2>
                 {% for item in meal_items %}
                     {% if meal.id == item.meal_id %}
                     <!-- <img class="card-img-top padding1" src="{% static 'images/fruit_bowl.jpg' %}"
@@ -38,10 +40,18 @@
                     {% endif %}
                 {% endfor %}
                 <br>
-                <button type="submit">calculate new content</button>
+                <button type="submit" name="action" value="calculate" class="calculate" id="calculate{{meal.id}}">calculate new content</button>
+                <br>
+                <button type="submit" name="action" value="delete" class="delete" id="delete{{meal.id}}">delete</button>
+                <br>
+                <button type="submit" name="action" value="edit" class="edit" id="edit{{meal.id}}">edit food types in meal</button>
             </div>
             {% endfor %}
+        </form>
         </div>
     </div>
 </body>
+<!-- custom javascript -->
+<script src="../static/js/script2.js"></script>
 {% endblock %}
+</html>
