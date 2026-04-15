@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h1>Meal List</h1>
+<p><a href="food_adder/meal_create">[Create New Meal]</a></p>
+
+<ul>
+  {% for meal in meal_results %}
+    <li>
+        {{meal.id}}&nbsp;
+        {{meal.meal_name}}&nbsp;
+        <a href="/food_adder/meal_edit/{{meal.id}}">[Edit]</a>&nbsp;
+        <a href="/feed_adder/meal_delete/{{meal.id}}">[Delete]</a>&nbsp;
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}
