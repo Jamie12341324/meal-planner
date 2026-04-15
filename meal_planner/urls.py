@@ -20,15 +20,20 @@ from food_adder.views import my_hello
 from food_adder.views import start_meal
 from food_adder.views import my_view_name
 from food_adder.views import meal_list
+from food_adder.views import meal_update
+from food_adder.views import meal_delete
+
 # from food_adder.templates import food_add
 #from meal_planner.views import my_hello
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("accounts/", include("allauth.urls")),
-    path('hello/', my_hello, name='my_view'),
+    path('hello/<int:id>', my_hello, name='my_view'),
     path('edit_meal/', my_hello, name='start2'),
     #path('hello2/', my_view_name, name='my_view'),
     path('start_meal/', start_meal, name='start'),
     # path('food_add', food_add, name="food adder")
-    path('meal_list/',meal_list, name="meal_list")
+    path('meal_list/',meal_list, name="meal_list"),
+    path('meal_update/<int:id>',meal_update, name="meal_update"),
+    path('meal_delete/<int:id>',meal_delete, name="meal_delete")
 ]

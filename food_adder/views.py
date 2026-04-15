@@ -8,12 +8,21 @@ from .models import Meal_contents
 from django.template import loader
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
 
 # Create your views here.
 
 @login_required(login_url="/accounts/login/")
-def my_hello(request):
+def my_hello(request,id):
+    code_to_name={
+        "Strawberry":"14-324",
+        "Banana":"14-318",
+        "Apple":"14-319",
+        "Orange":"14-360",
+    }
     Meals=Meal.objects.filter(Q(user_id=request.user.id)).values()
+    #Meals=Meal.objects.filter(Q(user_id=request.user.id) & Q(id=id) ).values()
+    
     L2=len(Meals)
     c2=0
     array=[]
@@ -21,6 +30,7 @@ def my_hello(request):
         array.append(Meals[c2]["name"])
         c2=c2+1
     if request.method=="POST" and request.POST.get("meal_name") not in array and len(request.POST.getlist("action"))==0:
+    #if request.method=="POST" and request.POST.get("meal_name") in array and len(request.POST.getlist("action"))==0:
         # getlist function was found looking at an AI and used to get the items in a meal that had just been created
         # to help save information to the database
         L=len(request.POST.getlist("example"))
@@ -36,9 +46,11 @@ def my_hello(request):
         #         highest=meal_items[c3]["meal_id"]
         #     c3=c3+1
         meal=Meal()
+        #meal = Meal.objects.filter(Q(id=id)).values()
         meal.name=request.POST.get("meal_name")
         meal.user = request.user
         meal.save()
+        meal_name = meal.name
         while c<L:
             meal_item=Meal_Item()
             # getlist function was found looking at an AI and used to get the items in a meal that had just been created
@@ -46,35 +58,65 @@ def my_hello(request):
             meal_item.food_code=request.POST.getlist("example")[c]
             meal_item.mass=100
             meal_item.meal=meal
+            meal_item.food_data_code_id = code_to_name[meal_item.food_code]
             #meal_item.meal.name=request.POST.get("meal_name")
             #meal_item.meal_id=highest+1
             #print("highest",highest)
             meal_item.save()
+
             c=c+1
-        meal_items=Meal_Item.objects.filter(Q(meal__user_id=request.user.id)).values()
+        meal_items=Meal_Item.objects.filter(Q(meal__user_id=request.user.id) and Q(meal_id=id)).values()
         item_count = meal_items.count
         #
         food_list=[]
-        food_list.append(5526)
+        for item in meal_items:
+            food_list.append(code_to_name[item['food_code']])
         Meals=Meal.objects.filter(Q(user_id=request.user.id)).values()
-        food_datas=Food_Data.objects.filter(id__in=food_list).values()
+        food_datas=Food_Data.objects.filter(food_code__in=food_list).values()
         #
         meal_contents0=Meal_contents()
-        meal_contents0.meal=meal.name
-        meal_contents0.potassium=meal_item.mass*food_datas[0]["potassium"]/100000
-        meal_contents0.calcium=meal_item.mass*food_datas[0]["calcium"]/100000
-        meal_contents0.magnesium=meal_item.mass*food_datas[0]["magnesium"]/100000
-        meal_contents0.sodium=meal_item.mass*food_datas[0]["sodium"]/100000
-        meal_contents0.energy_kcal=meal_item.mass*food_datas[0]["energy_kcal"]/100
+        c=0
+
+        potassium = 0
+        calcium = 0
+        magnesium = 0
+        sodium = 0
+        energy_kcal = 0
+        item_list = Meal_Item.objects.filter(Q(meal__user_id=request.user.id) and Q(meal_id=id)).values('id','mass','food__potassium','food__calcium','food__magnesium','food__sodium','food__energy_kcal')
+        for item in item_list:
+            potassium =  potassium + item['mass'] * item['food__potassium']
+            calcium = calcium + item['mass'] * item['food__calcium']
+            magnesium = magnesium + item['mass'] * item['food__magnesium']
+            sodium = sodium + item['mass'] * item['food__sodium']
+            energy_kcal = energy_kcal + item['mass'] * item['food__energy_kcal']
+            
+        meal_contents0.meal  =meal.name
+        meal_contents0.potassium = potassium
+        meal_contents0.calcium = calcium
+        meal_contents0.magnesium = magnesium
+        meal_contents0.sodium = sodium
+        meal_contents0.energy_kcal = energy_kcal
         meal_contents0.save()
         meal_contents=Meal_contents.objects.all().values()
+
+        #while c<L2:
+        #    meal_contents0.meal=meal.name
+        #    meal_contents0.potassium=meal_items[c].mass*food_datas[c]["potassium"]/100000
+        #    meal_contents0.calcium=meal_items[c].mass*food_datas[c]["calcium"]/100000
+        #    meal_contents0.magnesium=meal_items[c].mass*food_datas[c]["magnesium"]/100000
+        #    meal_contents0.sodium=meal_items[c].mass*food_datas[c]["sodium"]/100000
+        #    meal_contents0.energy_kcal=meal_items[c].mass*food_datas[c]["energy_kcal"]/100
+        #    c=c+1
+        #meal_contents0.save()
+        #meal_contents=Meal_contents.objects.all().values()
         context={
+            'meal_name':meal_name,
             'user_id':request.user.id,
             'Meals':Meals,
             'meal_items':meal_items,
             'item_count':item_count,
             'food_data':food_datas,
-            'meal_contents':meal_contents,
+            'meal_contents':meal_contents0,
         }
         #template = loader.get_template('meal_edit.html')
         #return HttpResponse(template.render(context,request))
@@ -137,3 +179,38 @@ def meal_list(request):
     }
     template = loader.get_template('meal_list.html')
     return HttpResponse(template.render(context, request))
+
+def meal_update(request,id):
+    meal = Meal.objects.get(id=id)
+    meal_name = meal.name
+    meal_id = meal.id
+    if request.method == "POST":
+        x=1
+    else:
+        item_list = Meal_Item.objects.filter(Q(meal__user_id=request.user.id) and Q(meal_id=id)).values('id','food__food_name','mass','food__potassium','food__calcium','food__magnesium','food__sodium','food__energy_kcal')
+
+        potassium = 0
+        calcium = 0
+        magnesium = 0
+        sodium = 0
+        energy_kcal = 0
+
+        for item in item_list:
+            potassium =  potassium + item['mass'] * item['food__potassium'] / 100000
+            calcium = calcium + item['mass'] * item['food__calcium'] / 100000
+            magnesium = magnesium + item['mass'] * item['food__magnesium'] / 100000
+            sodium = sodium + item['mass'] * item['food__sodium'] / 100000
+            energy_kcal = energy_kcal + item['mass'] * item['food__energy_kcal'] / 100000
+            
+        context = {
+        "meal_name": meal_name,
+        "meal_id": meal_id,
+        "item_list": item_list,
+        "potassium": potassium
+    }
+    template = loader.get_template('meal_update.html')
+    return HttpResponse(template.render(context, request))
+
+def meal_delete(request,id):
+    Meal.objects.filter(Q(user_id=request.user.id) & Q(id=id)).delete()
+    return redirect("/meal_list")

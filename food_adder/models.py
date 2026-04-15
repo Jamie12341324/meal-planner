@@ -14,12 +14,7 @@ class Meal(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
 
-class Meal_Item(models.Model):
-    meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
-    food_code=models.CharField(max_length=20)
-    # food_data=models.ForeignKey(Food_Data, on_delete=models.CASCADE, related_name="Food_Data")
-    # IntegerField from stackoverflow
-    mass=models.IntegerField(null=True)
+
     
 class Meal_contents(models.Model):
     meal=models.CharField(max_length=255)
@@ -30,7 +25,7 @@ class Meal_contents(models.Model):
     energy_kcal = models.DecimalField(null=True, max_digits=11, decimal_places=2)
 
 class Food_Data(models.Model):
-   food_code = models.CharField(max_length=20)
+   food_code = models.CharField(max_length=20, unique=True)
    food_name = models.CharField(max_length=100)
    food_group = models.CharField(max_length=20)
    water = models.DecimalField(null=True, max_digits=11, decimal_places=2)
@@ -80,11 +75,18 @@ class Food_Data(models.Model):
    biotin = models.DecimalField(null=True, max_digits=11, decimal_places=2)
    vitamin_c = models.DecimalField(null=True, max_digits=11, decimal_places=2)
    food_name_lcase = models.CharField(max_length=100, null=True)
-
 def __str__(self):
     return f"{self.food_code} {self.food_name}"
 
-class Mealitem (models.Model):
+class Meal_Item(models.Model):
+    meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
+    food_code=models.CharField(max_length=20)
+    #food_data_code = models.CharField(max_length=20)
+    food=models.ForeignKey(Food_Data, on_delete=models.CASCADE, to_field="food_code", default="14-324" )
+    # IntegerField from stackoverflow
+    mass=models.IntegerField(null=True)
+
+class Mealitem(models.Model):
    meal = models.ForeignKey(Meal, on_delete=models.CASCADE) 
-   food_data=models.ForeignKey(Food_Data, on_delete=models.CASCADE)
+   food_data=models.ForeignKey(Food_Data, to_field='food_code', on_delete=models.PROTECT)
    mass=models.IntegerField(null=True) 
