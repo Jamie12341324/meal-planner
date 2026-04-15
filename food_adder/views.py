@@ -129,3 +129,11 @@ def my_view_name(request):
             "food_add.html",
             context
         )
+    
+def meal_list(request):
+    meal_results = Meal.objects.filter(Q(user_id=request.user.id)).values().order_by("id")
+    context = {
+        'meal_results': meal_results,
+    }
+    template = loader.get_template('meal_list.html')
+    return HttpResponse(template.render(context, request))

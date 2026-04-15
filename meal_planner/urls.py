@@ -19,6 +19,7 @@ from django.urls import path, include
 from food_adder.views import my_hello
 from food_adder.views import start_meal
 from food_adder.views import my_view_name
+from food_adder.views import meal_list
 # from food_adder.templates import food_add
 #from meal_planner.views import my_hello
 urlpatterns = [
@@ -29,4 +30,5 @@ urlpatterns = [
     #path('hello2/', my_view_name, name='my_view'),
     path('start_meal/', start_meal, name='start'),
     # path('food_add', food_add, name="food adder")
+    path('meal_list/',meal_list, name="meal_list")
 ]

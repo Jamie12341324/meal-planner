@@ -11,15 +11,16 @@ class Food(models.Model):
     featured_image = CloudinaryField('image', default='placeholder')
 
 class Meal(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="meal_username")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
 
 class Meal_Item(models.Model):
-    meal = models.ForeignKey(Meal, on_delete=models.CASCADE, related_name="meal_name")
+    meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
     food_code=models.CharField(max_length=20)
     # food_data=models.ForeignKey(Food_Data, on_delete=models.CASCADE, related_name="Food_Data")
     # IntegerField from stackoverflow
-    mass=models.IntegerField(null=True) 
+    mass=models.IntegerField(null=True)
+    
 class Meal_contents(models.Model):
     meal=models.CharField(max_length=255)
     potassium=models.DecimalField(null=True, max_digits=11, decimal_places=2)
@@ -27,6 +28,7 @@ class Meal_contents(models.Model):
     magnesium=models.DecimalField(null=True, max_digits=11, decimal_places=2)
     sodium = models.DecimalField(null=True, max_digits=11, decimal_places=2)
     energy_kcal = models.DecimalField(null=True, max_digits=11, decimal_places=2)
+
 class Food_Data(models.Model):
    food_code = models.CharField(max_length=20)
    food_name = models.CharField(max_length=100)
@@ -81,3 +83,8 @@ class Food_Data(models.Model):
 
 def __str__(self):
     return f"{self.food_code} {self.food_name}"
+
+class Mealitem (models.Model):
+   meal = models.ForeignKey(Meal, on_delete=models.CASCADE) 
+   food_data=models.ForeignKey(Food_Data, on_delete=models.CASCADE)
+   mass=models.IntegerField(null=True) 
