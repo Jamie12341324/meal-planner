@@ -118,6 +118,7 @@ def my_hello(request,id):
             'food_data':food_datas,
             'meal_contents':meal_contents0,
         }
+        return redirect("/meal_update")
         #template = loader.get_template('meal_edit.html')
         #return HttpResponse(template.render(context,request))
         # information on passing context into a webpage found on w3schools
@@ -185,8 +186,26 @@ def meal_update(request,id):
     meal_name = meal.name
     meal_id = meal.id
     if request.method == "POST":
-        x=1
+        masses=request.POST.getlist("mass")
+        #m_id=masses[0].id[4:len(masses.id)]
+        #print("thing",m_id)
+        meal_items = Meal_Item.objects.filter(Q(meal_id=id)).values()
+        for item in meal_items:
+            meal_item = Meal_Item.objects.get(id=item["id"])
+            mass = int(request.POST['mass' + str(item["id"]) ])
+            meal_item.mass = mass
+            meal_item.save() 
+        #item2.save()
+        #for masses2 in item2:
+        #    meal_item.id=str(masses2.id)
+        #    meal_item = Meal_Item.objects.get(id=meal_item.id)
+        #    meal_item.mass = 50
+        #    meal_item.save()
+            #masses2['mass']=50
+            #masses2.save()
+        return redirect("/meal_update/"+str(id))
     else:
+        # This query uses the food foreign key to access the food data using the __ (double underline) convention
         item_list = Meal_Item.objects.filter(Q(meal__user_id=request.user.id) and Q(meal_id=id)).values('id','food__food_name','mass','food__potassium','food__calcium','food__magnesium','food__sodium','food__energy_kcal')
 
         potassium = 0
@@ -206,7 +225,8 @@ def meal_update(request,id):
         "meal_name": meal_name,
         "meal_id": meal_id,
         "item_list": item_list,
-        "potassium": potassium
+        "potassium": potassium,
+        "meal_items": meal_items,
     }
     template = loader.get_template('meal_update.html')
     return HttpResponse(template.render(context, request))

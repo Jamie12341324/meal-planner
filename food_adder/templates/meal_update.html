@@ -7,7 +7,8 @@
 <p><a href="/meal_list">[Back to Meals]</a>&nbsp;<a href="/hello/{{meal_id}}">[Add Foods]</a></p>
 
 <form action="" method="POST">
-
+    <input type="text" value = "{{meal_items}}"" width="500"> 
+    {% csrf_token %}
     Update list:<input type="text" name="update_list" id="update_list" /><br /><br />
     <!-- <input type="text" name="item_list" id="item_list" value="{{ item_list }}" /> -->
 
@@ -16,7 +17,7 @@
         <li>
             {{item.id}}-&nbsp;
             {{item.food__food_name}}-&nbsp;
-            <input type="Text" id="mass{{item_id}}" name="mass{{item_id}}" value="{{ item.mass }}"   >
+            <input type="Text" id="mass{{item.id}}" name="mass{{item.id}}" value="{{ item.mass }}"   >
             <a href="/meal_item_delete/{{item.id}}">[Delete]</a>&nbsp;
         </li>
     {% endfor %}
