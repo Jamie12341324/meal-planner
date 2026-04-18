@@ -85,8 +85,3 @@ class Meal_Item(models.Model):
     food=models.ForeignKey(Food_Data, on_delete=models.CASCADE, to_field="food_code", default="14-324" )
     # IntegerField from stackoverflow
     mass=models.IntegerField(null=True)
-
-class Mealitem(models.Model):
-   meal = models.ForeignKey(Meal, on_delete=models.CASCADE) 
-   food_data=models.ForeignKey(Food_Data, to_field='food_code', on_delete=models.PROTECT)
-   mass=models.IntegerField(null=True) 

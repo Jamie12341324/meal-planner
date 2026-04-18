@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 from pathlib import Path
 import os
 import sys
+import dj_database_url
 if os.path.isfile('env.py'):
     import env
 
@@ -86,15 +87,15 @@ WSGI_APPLICATION = 'meal_planner.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
-  'default': {
-      'ENGINE': 'django.db.backends.postgresql',
-      'NAME': 'food_data',
-      'USER': 'postgres',
-      'PASSWORD': 'pandora99',
-      'HOST': 'localhost',
-      'PORT': '5432'
-  },
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+#   'default': {
+#       'ENGINE': 'django.db.backends.postgresql',
+#       'NAME': 'food_data',
+#       'USER': 'postgres',
+#       'PASSWORD': 'pandora99',
+#       'HOST': 'localhost',
+#       'PORT': '5432'
+#   },
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',

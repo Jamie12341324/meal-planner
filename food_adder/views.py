@@ -29,11 +29,36 @@ def my_hello(request,id):
     while c2<L2:
         array.append(Meals[c2]["name"])
         c2=c2+1
-    if request.method=="POST" and request.POST.get("meal_name") not in array and len(request.POST.getlist("action"))==0:
-    #if request.method=="POST" and request.POST.get("meal_name") in array and len(request.POST.getlist("action"))==0:
+
+    if request.method=="POST":
+        print(request.POST.getlist("example"))
+        c = 0
+        L=len(request.POST.getlist("example"))
+        
+        while c<L:
+            print(request.POST.getlist("example")[c] + " " + code_to_name[ request.POST.getlist("example")[c] ] )
+            data_code = code_to_name[ request.POST.getlist("example")[c] ]
+            meal_chk = Meal_Item.objects.filter(Q(meal_id=id) & Q( food_id = data_code )  ).values()
+            if meal_chk.count() < 1:
+                meal_item=Meal_Item()
+                meal_item.food_code=request.POST.getlist("example")[c]
+                meal_item.mass=100
+                meal_item.meal_id = id
+                meal_item.food_id = code_to_name[ request.POST.getlist("example")[c] ] 
+                meal_item.save()
+            c=c+1
+            
+        return redirect("/meal_update/"+str(id))
+    
+    
+    
+        meal_items=Meal_Item.objects.filter(Q(meal_id=id)).values()
+        #if request.method=="POST" and request.POST.get("meal_name") in array and len(request.POST.getlist("action"))==0:
         # getlist function was found looking at an AI and used to get the items in a meal that had just been created
         # to help save information to the database
         L=len(request.POST.getlist("example"))
+        print(request.POST.getlist("example"))
+        #L=len(code_to_name)
         c=0
         # information on dictionaries from w3schools no longer used
         # meal_items=Meal_Item.objects.all().values()
@@ -44,27 +69,46 @@ def my_hello(request,id):
         #     print("meal_items[c3]",meal_items[c3])
         #     if meal_items[c3]["meal_id"]>highest:
         #         highest=meal_items[c3]["meal_id"]
+        meal_items=Meal_Item.objects.filter(Q(meal_id=id)).values()
         #     c3=c3+1
-        meal=Meal()
-        #meal = Meal.objects.filter(Q(id=id)).values()
-        meal.name=request.POST.get("meal_name")
-        meal.user = request.user
-        meal.save()
-        meal_name = meal.name
-        while c<L:
-            meal_item=Meal_Item()
-            # getlist function was found looking at an AI and used to get the items in a meal that had just been created
-            # to help save information to the database
-            meal_item.food_code=request.POST.getlist("example")[c]
-            meal_item.mass=100
-            meal_item.meal=meal
-            meal_item.food_data_code_id = code_to_name[meal_item.food_code]
-            #meal_item.meal.name=request.POST.get("meal_name")
-            #meal_item.meal_id=highest+1
-            #print("highest",highest)
-            meal_item.save()
 
+        #meal=Meal()
+        #meal = Meal.objects.filter(Q(id=id)).values()
+        #meal.name=request.POST.get("meal_name")
+        #meal.name="fruit3"
+        #meal.user = request.user
+        #meal.save()
+        #meal_name = meal.name
+
+        meal = Meal.objects.get(id=id)
+        c=0
+        while c<L:
+            do=False
+            for meal2 in meal_items:
+                if request.POST.getlist("example")[c] == meal2["food_code"]:
+                    do=True
+                print("meal2[food_code]",meal2["food_code"])
+                print("request.POST.getlist(example)[c]",request.POST.getlist("example")[c])
+                print("do",do)
+            #if do==False:
+                meal_item=Meal_Item()
+                # getlist function was found looking at an AI and used to get the items in a meal that had just been created
+                # to help save information to the database
+                print("code" + str(c))
+                meal_item.food_code=request.POST.getlist("example")[c]
+                meal_item.mass=100
+                meal_item.meal = meal
+                meal_item.food_code_id = code_to_name[meal_item.food_code] 
+                # meal_item.food_data_code_id = code_to_name[meal_item.food_code]
+                #meal_item.meal.name=request.POST.get("meal_name")
+                #meal_item.meal_id=highest+1
+                #print("highest",highest)
+                meal_item.save()
+                print("meal_item.food_code",meal_item.food_code)
             c=c+1
+        print("back to meal update")
+        return redirect("/meal_update/"+str(id))
+
         meal_items=Meal_Item.objects.filter(Q(meal__user_id=request.user.id) and Q(meal_id=id)).values()
         item_count = meal_items.count
         #
@@ -118,7 +162,7 @@ def my_hello(request,id):
             'food_data':food_datas,
             'meal_contents':meal_contents0,
         }
-        return redirect("/meal_update")
+        return redirect("/meal_update/"+str(id))
         #template = loader.get_template('meal_edit.html')
         #return HttpResponse(template.render(context,request))
         # information on passing context into a webpage found on w3schools
@@ -226,7 +270,7 @@ def meal_update(request,id):
         "meal_id": meal_id,
         "item_list": item_list,
         "potassium": potassium,
-        "meal_items": meal_items,
+        #"meal_items": meal_items,
     }
     template = loader.get_template('meal_update.html')
     return HttpResponse(template.render(context, request))
