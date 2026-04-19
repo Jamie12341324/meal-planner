@@ -20,9 +20,6 @@
                 <li>kcal is involved in maintaining a balance between kcal consumed and energy expended</li>
             </ul>
             <form action="" method="POST">
-            {% for meal in meals %}
-            <p class="meal_names">{{ meal.name }}</p>
-            {% endfor %}
             {% csrf_token %}
             <label for="meal_name">meal name</label>
             <input type="text" id="meal_name" name="meal_name">
