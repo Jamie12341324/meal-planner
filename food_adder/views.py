@@ -36,7 +36,7 @@ def my_hello(request,id):
         L=len(request.POST.getlist("example"))
         
         while c<L:
-            print(request.POST.getlist("example")[c] + " " + code_to_name[ request.POST.getlist("example")[c] ] )
+            #print(request.POST.getlist("example")[c] + " " + code_to_name[ request.POST.getlist("example")[c] ] )
             data_code = code_to_name[ request.POST.getlist("example")[c] ]
             meal_chk = Meal_Item.objects.filter(Q(meal_id=id) & Q( food_id = data_code )  ).values()
             if meal_chk.count() < 1:
@@ -47,7 +47,7 @@ def my_hello(request,id):
                 meal_item.food_id = code_to_name[ request.POST.getlist("example")[c] ] 
                 meal_item.save()
             c=c+1
-            
+
         return redirect("/meal_update/"+str(id))
     
     
@@ -185,6 +185,8 @@ def my_hello(request,id):
             context
         )
     # return HttpResponse("Hello, blog!!")
+
+@login_required(login_url="/accounts/login/")
 def start_meal(request):
     if request.method=="POST":
         meal_item=Meal_Item()
@@ -202,6 +204,8 @@ def start_meal(request):
             "food_add.html",
             context
         )
+    
+@login_required(login_url="/accounts/login/")
 def my_view_name(request):
     if request.method=="POST":
         foods=Food.objects.all().values()
@@ -217,6 +221,7 @@ def my_view_name(request):
             context
         )
     
+@login_required(login_url="/accounts/login/")
 def meal_list(request):
     meal_results = Meal.objects.filter(Q(user_id=request.user.id)).values().order_by("id")
     context = {
@@ -225,6 +230,7 @@ def meal_list(request):
     template = loader.get_template('meal_list.html')
     return HttpResponse(template.render(context, request))
 
+@login_required(login_url="/accounts/login/")
 def meal_update(request,id):
     meal = Meal.objects.get(id=id)
     meal_name = meal.name
@@ -270,11 +276,21 @@ def meal_update(request,id):
         "meal_id": meal_id,
         "item_list": item_list,
         "potassium": potassium,
+        "calcium": calcium,
+        "magnesium": magnesium,
+        "sodium": sodium,
+        "energy_kcal": energy_kcal,
         #"meal_items": meal_items,
     }
     template = loader.get_template('meal_update.html')
     return HttpResponse(template.render(context, request))
 
+@login_required(login_url="/accounts/login/")
 def meal_delete(request,id):
     Meal.objects.filter(Q(user_id=request.user.id) & Q(id=id)).delete()
     return redirect("/meal_list")
+
+@login_required(login_url="/accounts/login/")
+def meal_item_delete(request,meal_id,meal_item_id):
+    Meal_Item.objects.filter(Q(id=meal_item_id) & Q(meal_id=meal_id)).delete()
+    return redirect("/meal_update/"+str(meal_id))

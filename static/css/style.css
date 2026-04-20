@@ -5,6 +5,9 @@
 .padding2{
     max-width: 50px;
 }
+#padding3{
+    margin-top: 300px;
+}
 .background {
     background-image: url(../images/fruit_bowl.jpg);
     margin: auto;

@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block content %}
-
 <h1>Meal Update for {{meal_name}}</h1>
 <p><a href="/meal_list">[Back to Meals]</a>&nbsp;<a href="/hello/{{meal_id}}">[Add Foods]</a></p>
 
@@ -18,11 +17,15 @@
             {{item.id}}-&nbsp;
             {{item.food__food_name}}-&nbsp;
             <input type="Text" id="mass{{item.id}}" name="mass{{item.id}}" value="{{ item.mass }}"   >
-            <a href="/meal_item_delete/{{item.id}}">[Delete]</a>&nbsp;
+            <a href="/meal_item_delete/{{meal_id}}/{{item.id}}">[Delete]</a>&nbsp;
         </li>
     {% endfor %}
     </ul>
     <input type="submit" value="Submit"><br /><br />
-    Potassium:{{potassium}}<br />
+    <p>Potassium: {{potassium}} grams</p><br />
+    <p>calcium: {{calcium}} grams</p><br />
+    <p>magnesium: {{magnesium}} grams</p><br />
+    <p>sodium: {{sodium}} grams</p><br />
+    <p>energy_kcal: {{energy_kcal}} kcal</p><br />
 </form>
 {% endblock %}
