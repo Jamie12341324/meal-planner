@@ -19,6 +19,8 @@ def my_hello(request,id):
         "Banana":"14-318",
         "Apple":"14-319",
         "Orange":"14-360",
+        "Grapes":"14-323",
+        "Raspberries":"14-375",
     }
     Meals=Meal.objects.filter(Q(user_id=request.user.id)).values()
     #Meals=Meal.objects.filter(Q(user_id=request.user.id) & Q(id=id) ).values()
