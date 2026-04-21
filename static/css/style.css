@@ -1,3 +1,10 @@
+.standard{
+    text-align: center;
+    margin:auto;
+    padding:20px;
+    background-color: rgba(9, 9, 9, 0.5);
+    color:white;
+}
 #padding1 {
     margin-top:45px;
     box-sizing: border-box;

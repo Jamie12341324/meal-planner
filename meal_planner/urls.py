@@ -23,6 +23,7 @@ from food_adder.views import meal_list
 from food_adder.views import meal_update
 from food_adder.views import meal_delete
 from food_adder.views import meal_item_delete
+from food_adder.views import meal_create
 
 # from food_adder.templates import food_add
 #from meal_planner.views import my_hello
@@ -38,4 +39,5 @@ urlpatterns = [
     path('meal_update/<int:id>',meal_update, name="meal_update"),
     path('meal_delete/<int:id>',meal_delete, name="meal_delete"),
     path('meal_item_delete/<int:meal_id>/<int:meal_item_id>',meal_item_delete, name="food_delete"),
+    path('meal_create/',meal_create, name='meal_create'),
 ]

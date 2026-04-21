@@ -6,34 +6,19 @@
     
     <div class="container">
         <div class="row">
-            <h1>Meal Planner</h1>
-            <p>Meal Planner is a website you can use to make a meal out of different fruit and choose a mass for each type of fruit and then the website will tell you the potassium, magnesium, sodium and kcal for what you have selected.
-                On this page can you can click the add button below a strawberry to add it to the list of fruits in the meal. If a fruit is in a meal and you don't want it there anymore you can click the delete button below the fruit.
-                The reason why you would want to know how much potassium, magnesium, sodium and kcal are in a meal is because they effect health.
-                Here is a list of health benefits.
-            </p>
-            <ul>
-                <!-- information on health came from bing AI -->
-                <li>potassium helps with metabolism and stress reduction</li>
-                <li>magnesium helps with bone, heart and mental health</li>
-                <li>sodium improves muscle and nervous function</li>
-                <li>kcal is involved in maintaining a balance between kcal consumed and energy expended</li>
-            </ul>
             <form action="" method="POST">
             {% csrf_token %}
-            <label for="meal_name">meal name</label>
-            <input type="text" id="meal_name" name="meal_name">
             <div id="in_meal">
-                <p>List of foods in meal</p>
+                <h3>List of foods in meal {{meal_name}}</h3>
             </div>
             <button type="submit" id="meal_name_button">Go to meal page</button>
     {% for food in foods %}
     <!-- col-12-4 from bootstrap -->    
     <div class="col-2">
-    {% if "placeholder" in food.featured_image.url %}
+        {% if "placeholder" in food.featured_image.url %}
         <img class="card-img-top" src="{% static 'images/fruit_bowl.jpg' %}"
-            alt="placeholder image">
-    {% else %}
+        alt="placeholder image">
+        {% else %}
         <!-- food.featured_image.url images are from pinterest -->
         <img class="card-img-top scale" src=" {{ food.featured_image.url }}"
             alt="{{ food.name }}">

@@ -176,9 +176,12 @@ def my_hello(request,id):
     else:
         foods=Food.objects.all().values()
         meals=Meal.objects.all().values()
+        meal=Meal.objects.get(id=id)
+        meal_name = meal.name
         context = {
             "foods":foods,
             "meals":meals,
+            "meal_name":meal_name,
         }
         # information on passing context into a webpage found on w3schools
         return render(
@@ -296,3 +299,20 @@ def meal_delete(request,id):
 def meal_item_delete(request,meal_id,meal_item_id):
     Meal_Item.objects.filter(Q(id=meal_item_id) & Q(meal_id=meal_id)).delete()
     return redirect("/meal_update/"+str(meal_id))
+
+@login_required(login_url="/accounts/login/")
+def meal_create(request):
+    if request.method == "POST":
+        meal=Meal()
+        meal.user_id=request.user.id
+        meal.name=request.POST["meal_name"]
+        meal.save()
+        return redirect("/meal_list/")
+    else:
+        context={}
+        return render(
+            request,
+            "meal_create.html",
+            context
+        )
+    
