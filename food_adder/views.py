@@ -316,3 +316,20 @@ def meal_create(request):
             context
         )
     
+@login_required(login_url="/accounts/login/")
+def meal_create2(request,meal_id):
+    meal=Meal.objects.get(id=meal_id)
+    meal_name=meal.name
+    if request.method == "POST":
+        #meal=Meal()
+        #meal.user_id=request.user.id
+        meal.name=request.POST["meal_name"]
+        meal.save()
+        return redirect("/meal_list/")
+    else:
+        context={"meal_name": meal_name,}
+        return render(
+            request,
+            "meal_create.html",
+            context
+        )

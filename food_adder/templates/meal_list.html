@@ -10,9 +10,11 @@
     <li>
         {{meal.id}}&nbsp;
         {{meal.name}}&nbsp;
-        <a href="/meal_update/{{meal.id}}">[Edit]</a>&nbsp;
-        <a href="/meal_delete/{{meal.id}}">[Delete]</a>&nbsp;
+        <a href="/meal_update/{{meal.id}}"><button type="submit" class="btn btn-success">Edit</button></a>&nbsp;
+        <a href="/meal_create2/{{meal.id}}"><button type="submit" class="btn btn-success">Change name</button></a>&nbsp;
+        <a href="/meal_delete/{{meal.id}}"><button type="submit" class="btn btn-danger">Delete</button></a>&nbsp;
     </li>
+    <br>
   {% endfor %}
 </ul>
 {% endblock %}
