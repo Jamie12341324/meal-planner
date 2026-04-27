@@ -5,6 +5,22 @@
     background-color: rgba(9, 9, 9, 0.5);
     color:white;
 }
+.meal_names{
+    display: none;
+}
+.image-sizer{
+    max-width:150px;
+    max-height:150px;
+}
+#background_name_meal{
+    background-image: url(../images/images_for_site/fruit_bowls_background.png);
+}
+#background_meal_list{
+    background-image: url(../images/images_for_site/fruit_bowls_background2.png);
+}
+#background_meal_update{
+    background-image: url(../images/images_for_site/fruit_bowls_background3.png);
+}
 #padding1 {
     margin-top:45px;
     box-sizing: border-box;
@@ -14,6 +30,9 @@
 }
 #padding3{
     margin-top: 300px;
+}
+.padding4{
+    margin-bottom:20px;
 }
 .background {
     background-image: url(../images/fruit_bowl.jpg);

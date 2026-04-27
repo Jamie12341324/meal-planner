@@ -2,26 +2,29 @@
 {% load static %}
 
 {% block content %}
-<body>
-    
-    <div class="container">
-        <div class="row">
-            <form action="" method="POST">
+<div class="container">
+    <div class="row standard">
+        <div class="col-12 ">
+            <form method="POST">
             {% csrf_token %}
             <div id="in_meal">
-                <h3>List of foods in meal {{meal_name}}</h3>
+                <h1>List of foods to add to meal {{meal_name}}</h1>
             </div>
-            <button type="submit" id="meal_name_button">Go to meal page</button>
+            <button type="submit" id="meal_name_button" class="btn btn-success">Go to meal page</button>
+            <br>
+            <br>
+            </form>
+        </div>
     {% for food in foods %}
     <!-- col-12-4 from bootstrap -->    
-    <div class="col-2">
+    <div class="col-sm-12 col-xl-2 col-lg-4 col-md-6">
         {% if "placeholder" in food.featured_image.url %}
         <img class="card-img-top" src="{% static 'images/fruit_bowl.jpg' %}"
         alt="placeholder image">
         {% else %}
         <!-- food.featured_image.url images are from pinterest -->
-        <img class="card-img-top scale" src=" {{ food.featured_image.url }}"
-            alt="{{ food.name }}">
+        <img class="card-img-top scale image-sizer" src="{{food.featured_image.url}}"
+            alt="{{food.name}}">
     {% endif %}
     <p>food add page {{ food.name }} </p>
     <!-- btn-success btn-danger classes from bootstrap used for add and delete buttons  -->
@@ -29,12 +32,9 @@
     <button type="button" id="del{{food.name}}" class="btn btn-danger">Delete</button>
     </div>
     {% endfor %}
-    </form>
-        </div>
+    
     </div>
-</body>
+</div>
 <!-- custom javascript -->
 <script src="../static/js/script.js"></script>
 {% endblock %}
-
-</html>

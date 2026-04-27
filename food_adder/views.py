@@ -309,7 +309,8 @@ def meal_create(request):
         meal.save()
         return redirect("/meal_list/")
     else:
-        context={}
+        meals=Meal.objects.all().values()
+        context={"meals":meals,}
         return render(
             request,
             "meal_create.html",
@@ -318,6 +319,7 @@ def meal_create(request):
     
 @login_required(login_url="/accounts/login/")
 def meal_create2(request,meal_id):
+    meals=Meal.objects.all().values()
     meal=Meal.objects.get(id=meal_id)
     meal_name=meal.name
     if request.method == "POST":
@@ -327,7 +329,10 @@ def meal_create2(request,meal_id):
         meal.save()
         return redirect("/meal_list/")
     else:
-        context={"meal_name": meal_name,}
+        named=True
+        context={"meal_name": meal_name,
+                 "named": named,
+                 "meals": meals,}
         return render(
             request,
             "meal_create.html",
