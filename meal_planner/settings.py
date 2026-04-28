@@ -28,7 +28,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = 'django-insecure-y8%7db46_+&5&p)+x)w%7=em8u@1dz&x*34uhj**cl%lu_13ql'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get("DEBUG_SWITCH")
 
 ALLOWED_HOSTS = ['.herokuapp.com','127.0.0.1']
 
@@ -88,18 +88,6 @@ WSGI_APPLICATION = 'meal_planner.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
-#   'default': {
-#       'ENGINE': 'django.db.backends.postgresql',
-#       'NAME': 'food_data',
-#       'USER': 'postgres',
-#       'PASSWORD': 'pandora99',
-#       'HOST': 'localhost',
-#       'PORT': '5432'
-#   },
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
 }
 
 
