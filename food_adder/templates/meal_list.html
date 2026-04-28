@@ -8,17 +8,22 @@
           <h1>Meal List</h1>
           <p><a href="/meal_create" class="btn btn-success">Create New Meal</a></p>
 
-          <ul>
+          <table class="standard">
+            <tr>
+              <th> Meal name</th>
+              <th> Edit </th>
+              <th> Rename </th>
+              <th> Delete</th>
+            </tr>
             {% for meal in meal_results %}
-              <li class="padding4">
-                  {{meal.id}}&nbsp;
-                  {{meal.name}}&nbsp;
-                  <a href="/meal_update/{{meal.id}}" class="btn btn-success">Edit</a>&nbsp;
-                  <a href="/meal_create2/{{meal.id}}" class="btn btn-success">Change name</a>&nbsp;
-                  <a href="/meal_delete/{{meal.id}}" class="btn btn-danger">Delete</a>&nbsp;
-              </li>
+              <tr>
+                  <td class="padding4">{{meal.name}}</td>&nbsp;
+                  <td class="padding4"><a href="/meal_update/{{meal.id}}" class="btn btn-success">Edit</a></td>&nbsp;
+                  <td class="padding4"><a href="/meal_create2/{{meal.id}}" class="btn btn-success">Rename</a></td>&nbsp;
+                  <td class="padding4"><a href="/meal_delete/{{meal.id}}" class="btn btn-danger">Delete</a></td>&nbsp;
+              </tr>
             {% endfor %}
-          </ul>
+            </table>
         </div>
     </div>
 </div>
