@@ -39,5 +39,5 @@ urlpatterns = [
     path('meal_delete/<int:id>',meal_delete, name="meal_delete"),
     path('meal_item_delete/<int:meal_id>/<int:meal_item_id>',meal_item_delete, name="food_delete"),
     path('meal_create/',meal_create, name='meal_create'),
-    path('meal_create2/<int:meal_id>',meal_create2, name='meal_create'),
+    path('meal_create2/<int:meal_id>',meal_create2, name='meal_create2'),
 ]

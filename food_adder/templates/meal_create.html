@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% for meal in meals %}
+<textarea class="meal_names">{{meal.name}}</textarea>
+{% endfor %}
+<div class="container" id="background_name_meal">
+<div class="row">
+    <div class="standard col-12">
+        <h1>Meal Planner</h1>
+            <p>Meal Planner is a website you can use to make a meal out of different fruit and choose a mass for each type of fruit and then the website will tell you the potassium, magnesium, sodium and kcal for what you have selected.
+                On this page can you can click the add button below a strawberry to add it to the list of fruits in the meal. If a fruit is in a meal and you don't want it there anymore you can click the delete button below the fruit.
+                The reason why you would want to know how much potassium, magnesium, sodium and kcal are in a meal is because they effect health.
+                Here is a list of health benefits.
+            </p>
+            <ul>
+                <!-- information on health came from bing AI -->
+                <li>potassium helps with metabolism and stress reduction</li>
+                <li>magnesium helps with bone, heart and mental health</li>
+                <li>sodium improves muscle and nervous function</li>
+                <li>kcal is involved in maintaining a balance between kcal consumed and energy expended</li>
+            </ul>
+    </div>
+<div class="standard col-12">
+<h1>Name your meal</h1>
+<br>
+<form method="POST">
+{% csrf_token %}
+<label for="meal_name">Meal name</label>
+<input type="text" id="meal_name" name="meal_name" value="{{meal_name}}">
+<br>
+<br>
+<!-- btn-success classes from bootstrap used for create meal button  -->
+{% if named %}
+    <button type="submit" id="meal_name_buttonb" class="btn btn-success">Rename meal</button>
+{% else %}
+    <button type="submit" id="meal_name_button" class="btn btn-success">Create meal</button>
+{% endif %}
+<br>
+</form>
+<br>
+<a href="/meal_list" class="btn btn-success">Go back to meal list</a>
+</div>
+</div>
+</div>
+<!-- custom javascript -->
+<script src="../static/js/script.js"></script>
+{% endblock %}
