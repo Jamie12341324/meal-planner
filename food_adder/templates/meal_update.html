@@ -13,19 +13,19 @@
             <br>
             <form method="POST">
                 {% csrf_token %}
+                <p> For guidance 1 Medium apple is 150 grams. 1 Medium banana is 150 grams. 1 Medium orange is 200 grams. 15 Medium grapes are 100 grams. 6 Medium strawberries are 100 grams. 30 Medium raspberries are 100 grams. We advise you to weigh your fruit to help you judge or to be exact.</p>
                 <ul>
                 {% for item in item_list %}
                     <li>
                         {{item.food__food_name}}-&nbsp;
-                        <!-- <label for="mass{{item.id}}">grams</label> -->
-                        <input type="Text" id="mass{{item.id}}" name="mass{{item.id}}" value="{{ item.mass }}">
-                        <p>grams</p>
+                        <input type="Text" id="mass{{item.id}}" name="mass{{item.id}}" value="{{ item.mass }}" onblur="return isNum(this);">
+                        <label for="mass{{item.id}}">grams</label>
                         <a href="/meal_item_delete/{{meal_id}}/{{item.id}}" class="btn btn-danger">Delete</a>&nbsp;
                     </li>
                     <br>
                 {% endfor %}
                 </ul>
-                <input type="submit" value="Submit" class="btn btn-success"><br><br>
+                <input type="submit" value="Calculate" class="btn btn-success" id="calc"><br><br>
                 <p>Potassium: {{potassium}} grams</p><br>
                 <p>Calcium: {{calcium}} grams</p><br>
                 <p>Magnesium: {{magnesium}} grams</p><br>
