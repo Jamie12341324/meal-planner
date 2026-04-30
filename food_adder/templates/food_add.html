@@ -10,7 +10,7 @@
             <div id="in_meal">
                 <h1>List of foods to add to meal {{meal_name}}</h1>
             </div>
-            <button type="submit" id="meal_name_button" class="btn btn-success">Go to meal page</button>
+            <button type="submit" id="meal_name_button" class="btn btn-success" aria-label="Button that takes you to the meal page and adds selected foods to a meal">Go to meal page</button>
             <br>
             <br>
             </form>
@@ -28,8 +28,8 @@
     {% endif %}
     <p>food add page {{ food.name }} </p>
     <!-- btn-success btn-danger classes from bootstrap used for add and delete buttons  -->
-    <button type="button" id="add{{food.name}}" class="btn btn-success">Add</button>
-    <button type="button" id="del{{food.name}}" class="btn btn-danger">Delete</button>
+    <button type="button" id="add{{food.name}}" class="btn btn-success" aria-label="Button that adds the food in the above image to the list of foods to be added to a meal">Add</button>
+    <button type="button" id="del{{food.name}}" class="btn btn-danger" aria-label="Button that deletes the food in the above image to the list of foods to be added to a meal">Delete</button>
     </div>
     {% endfor %}
     
