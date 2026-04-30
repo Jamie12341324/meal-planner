@@ -18,7 +18,7 @@
                 {% for item in item_list %}
                     <li>
                         {{item.food__food_name}}-&nbsp;
-                        <input type="Text" id="mass{{item.id}}" name="mass{{item.id}}" value="{{ item.mass }}" onblur="return isNum(this);" aria-label="input for the mass of a fruit which will be used to calculate the mass of potassium and other minerals">
+                        <input type="Text" id="mass{{item.id}}" name="mass{{item.id}}" value="{{ item.mass }}" onchange="return isNum(this);" style="width:80px;" aria-label="input for the mass of a fruit which will be used to calculate the mass of potassium and other minerals">
                         <label for="mass{{item.id}}">grams</label>
                         <a href="/meal_item_delete/{{meal_id}}/{{item.id}}" class="btn btn-danger">Delete</a>&nbsp;
                     </li>

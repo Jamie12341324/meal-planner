@@ -4,11 +4,49 @@ function button_click_(e){
 // tests if a input is a number and says "That is not a number" if its not
 // validate numeric input from stackoverflow
 function isNum(p){
-    if (isNaN(p.value)){
+
+    if (p.value=="0"){
+        return;
+    }
+    if(p.value.trim() == "" ){
         alert("That is not a number");
-        p.value="";
+        p.value="0";
+        p.focus();
+        return;
+    }
+    if(p.value.trim().includes("-") ){
+        alert("Numbers cannot be negative or contain dashes");
+        p.value="0";
+        p.focus();
+        return;
+    }
+    if(String(p.value).includes(".")){
+        alert("The number cannot contain decimals");
+        p.value="0";
+        p.focus();
+        return;
+    }
+    if(String(p.value).length>9){
+        alert("The number is far too big - it should be a thousand or less");
+        p.value="0";
+        p.focus();
+        return;
+    }
+    if (isNaN(p.value)){
+        alert("The number is invalid");
+        p.value="0";
         p.focus();
     }
+
+    num = parseInt(p.value);
+    
+    if(num > 1000 || num < 0 ){
+        alert("The number cannot be greater than 1000 or negative");
+        p.value="0";
+        p.focus();
+        return;
+    }
+
 }
 // checks to see if there is the same fruit already there when you click the add food button and adds the fruit if it is not there
 function button_click(e){
