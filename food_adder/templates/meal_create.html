@@ -3,7 +3,7 @@
 
 {% block content %}
 {% for meal in meals %}
-<textarea class="meal_names">{{meal.name}}</textarea>
+<textarea class="meal_names" name="meal_name_for_checks">{{meal.name}}</textarea>
 {% endfor %}
 <div class="container" id="background_name_meal">
 <div class="row">
@@ -50,5 +50,5 @@
 </div>
 </div>
 <!-- custom javascript -->
-<script src="../static/js/script.js"></script>
+
 {% endblock %}

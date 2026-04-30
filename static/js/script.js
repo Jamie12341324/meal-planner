@@ -1,4 +1,4 @@
-
+alert("static");
 function button_click_(e){
     alert("button_click " + e.srcElement.id);
 }
@@ -62,22 +62,27 @@ function button_click2(e){
               }
             }
         }
-
 document.addEventListener("DOMContentLoaded", function(){
     let button1=document.getElementById("meal_name_button");
     // checks to see if a meal already has the same name as the one you are trying to create and blocks it if its the same
-    button1.addEventListener("click", function(){
-        let names=document.getElementsByClassName("meal_names");
-        let current_name=document.getElementById("meal_name");
-        let i3=0;
-        while (i3<names.length){
-            // .value from Bing AI
-            if (names[i3].innerText==current_name.value){
-                alert("There is already a meal with that name pick a different name");
+    if (button1){
+        button1.addEventListener("click", function(){
+            let names=document.getElementsByClassName("meal_names");
+            alert(names);
+            let current_name=document.getElementById("meal_name");
+            let i3=0;
+            while (i3<names.length){
+                // .value from Bing AI
+                if (names[i3].innerText==current_name.value){
+                    alert("There is already a meal with that name pick a different name");
+                }
+                i3=i3+1;
             }
-            i3=i3+1;
-        }
-    });
+            if (current_name.value){
+                alert("you cant have a meal name that has nothing in it");
+            }
+        });
+    }
     // does the same thing as button1 but need to come from a seperate id because there are two examples of almost the same button but 
     // only one appears at a time because one is rename meal and the other is create meal
     let button1b=document.getElementById("meal_name_buttonb");
@@ -92,6 +97,10 @@ document.addEventListener("DOMContentLoaded", function(){
                     alert("There is already a meal with that name pick a different name");
                 }
                 i3=i3+1;
+            }
+            alert("current_name.value ["+current_name.value+"]");
+            if (current_name.value==""){
+                alert("you cant have a meal name that has nothing in it");
             }
         });
     }

@@ -167,11 +167,17 @@ def meal_item_delete(request,meal_id,meal_item_id):
 @login_required(login_url="/accounts/login/")
 def meal_create(request):
     if request.method == "POST":
-        meal=Meal()
-        meal.user_id=request.user.id
-        meal.name=request.POST["meal_name"]
-        meal.save()
-        return redirect("/meal_list/")
+        if request.POST["meal_name"] == '':
+            return redirect("/meal_create/")
+        meal_records = Meal.objects.filter(Q(name=request.POST["meal_name"]) & Q(user_id=request.user.id)).values()
+        if not meal_records.exists():
+            meal=Meal()
+            meal.user_id=request.user.id
+            meal.name=request.POST["meal_name"]
+            meal.save()
+            return redirect("/meal_list/")
+        else:
+            return redirect("/meal_create/")
     else:
         meals=Meal.objects.all().values()
         context={"meals":meals,}
@@ -187,6 +193,11 @@ def meal_create2(request,meal_id):
     meal=Meal.objects.get(id=meal_id)
     meal_name=meal.name
     if request.method == "POST":
+        if request.POST["meal_name"] == '':
+            return redirect("/meal_create2/"+str(meal_id))
+        meal_records = Meal.objects.filter(Q(name=request.POST["meal_name"]) & Q(user_id=request.user.id)).values()
+        if meal_records.exists():
+            return redirect("/meal_create2/"+str(meal_id))
         meal.name=request.POST["meal_name"]
         meal.save()
         return redirect("/meal_list/")
