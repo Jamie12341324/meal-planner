@@ -20,7 +20,7 @@
                         <label for="mass"> mass = </label>
                         <!-- input type number from w3schools -->
                         <!-- information on prepopulating input find using value= from AI copilot -->
-                        <input class="padding2" type="number" id="mass" name="mass"+{{Meals[0].id}} value="{{meal_items.mass}}">
+                        <input class="padding2" type="number" id="mass" name="mass"+{{Meals[0].id}} value="{{meal_items.mass}}" aria-label="input for the mass of a fruit which will be used to calculate the mass of potassium and other minerals">
                         <p>mass of potassium = {{ meal_contents.potassium }} grams</p>
                         <br>
                         <p>mass of calcium = {{ meal_contents.calcium }} grams</p>
@@ -31,9 +31,9 @@
                         <br>
                         <p>energy  = {{ meal_contents.energy_kcal }} kcal</p>
                 <br>
-                <button type="submit" name="action" value="calculate" class="calculate" id="calculate{{Meals[0].id}}">calculate new content</button>
+                <button type="submit" name="action" value="calculate" class="calculate" id="calculate{{Meals[0].id}}" aria-label="Button that works the new values of potassium and other minerals if the mass of a certain fruit has been changed">calculate new content</button>
                 <br>
-                <button type="submit" name="action" value="delete" class="delete" id="delete{{Meals[0].id}}">delete</button>
+                <button type="submit" name="action" value="delete" class="delete" id="delete{{Meals[0].id}}" aria-label="Button for deleting a fruit">delete</button>
                 <br>
                 <button type="submit" name="action" value="edit" class="edit" id="edit{{Meals[0].id}}">edit food types in meal</button>
             </div>
