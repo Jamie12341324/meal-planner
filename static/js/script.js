@@ -1,4 +1,3 @@
-alert("static");
 function button_click_(e){
     alert("button_click " + e.srcElement.id);
 }
@@ -17,7 +16,7 @@ function button_click(e){
     this_id = e.srcElement.id;
     for (let i=0; i<buttons.length; i++){
                 let things_in_meal=document.getElementById("in_meal");
-                let food=buttons[i].id.substr(3,buttons[i].id.length);
+                let food=buttons[i].id.substring(3,buttons[i].id.length);
                 //alert(food);
                 let c=0;
                 let L=things_in_meal.children.length;
@@ -68,7 +67,6 @@ document.addEventListener("DOMContentLoaded", function(){
     if (button1){
         button1.addEventListener("click", function(){
             let names=document.getElementsByClassName("meal_names");
-            alert(names);
             let current_name=document.getElementById("meal_name");
             let i3=0;
             while (i3<names.length){
@@ -78,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 }
                 i3=i3+1;
             }
-            if (current_name.value){
+            if (current_name.value==""){
                 alert("you cant have a meal name that has nothing in it");
             }
         });
@@ -98,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 }
                 i3=i3+1;
             }
-            alert("current_name.value ["+current_name.value+"]");
+            //alert("current_name.value ["+current_name.value+"]");
             if (current_name.value==""){
                 alert("you cant have a meal name that has nothing in it");
             }
