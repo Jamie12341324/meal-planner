@@ -17,10 +17,10 @@
             </tr>
             {% for meal in meal_results %}
               <tr>
-                  <td class="padding4">{{meal.name}}</td>&nbsp;
-                  <td class="padding4"><a href="/meal_update/{{meal.id}}" class="btn btn-success" aria-label="Link with button class for editing a meal">Edit</a></td>&nbsp;
-                  <td class="padding4"><a href="/meal_create2/{{meal.id}}" class="btn btn-success" aria-label="Link with button class for renaming a meal">Rename</a></td>&nbsp;
-                  <td class="padding4"><a href="/meal_delete/{{meal.id}}" class="btn btn-danger" aria-label="Link with button class for deleting a meal">Delete</a></td>&nbsp;
+                  <td class="padding4">{{meal.name}}</td>
+                  <td class="padding4"><a href="/meal_update/{{meal.id}}" class="btn btn-success" aria-label="Link with button class for editing a meal">Edit or Add fruits</a></td>
+                  <td class="padding4"><a href="/meal_create2/{{meal.id}}" class="btn btn-success" aria-label="Link with button class for renaming a meal">Rename</a></td>
+                  <td class="padding4"><a href="/meal_delete/{{meal.id}}" class="btn btn-danger" aria-label="Link with button class for deleting a meal">Delete</a></td>
               </tr>
             {% endfor %}
             </table>

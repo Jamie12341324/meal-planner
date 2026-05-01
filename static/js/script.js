@@ -9,7 +9,7 @@ function isNum(p){
         return;
     }
     if(p.value.trim() == "" ){
-        alert("That is not a number");
+        alert("You cannot enter blank - the field has been reset to zero");
         p.value="0";
         p.focus();
         return;

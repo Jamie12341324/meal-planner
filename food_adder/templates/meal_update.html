@@ -13,18 +13,27 @@
             <br>
             <form method="POST">
                 {% csrf_token %}
-                <p> For guidance 1 Medium apple is 150 grams. 1 Medium banana is 150 grams. 1 Medium orange is 200 grams. 15 Medium grapes are 100 grams. 6 Medium strawberries are 100 grams. 30 Medium raspberries are 100 grams. We advise you to weigh your fruit to help you judge or to be exact.</p>
-                <ul>
+                <p> For guidance 1 Medium apple is 150 grams.</p>
+                <p> 1 Medium banana is 150 grams. 1 Medium orange is 200 grams.</p>  
+                <p>15 Medium grapes are 100 grams. 6 Medium strawberries are 100 grams.</p>
+                <p>30 Medium raspberries are 100 grams. We advise you to weigh your fruit to help you judge or to be exact.</p>
+                <table class="standard">
+                    <tr>
+                        <th>Fruit name</th>
+                        <th>Mass</th>
+                        <th>Units</th>
+                        <th>Delete</th>
+                    </tr>
                 {% for item in item_list %}
-                    <li>
-                        {{item.food__food_name}}-&nbsp;
-                        <input type="Text" id="mass{{item.id}}" name="mass{{item.id}}" value="{{ item.mass }}" onchange="return isNum(this);" style="width:80px;" aria-label="input for the mass of a fruit which will be used to calculate the mass of potassium and other minerals">
-                        <label for="mass{{item.id}}">grams</label>
-                        <a href="/meal_item_delete/{{meal_id}}/{{item.id}}" class="btn btn-danger">Delete</a>&nbsp;
-                    </li>
-                    <br>
+                    <tr>
+                        <td>{{item.food__food_name}}</td>
+                        <td><input type="Text" id="mass{{item.id}}" name="mass{{item.id}}" value="{{ item.mass }}" onchange="return isNum(this);" style="width:80px;" aria-label="input for the mass of a fruit which will be used to calculate the mass of potassium and other minerals"></td>
+                        <td><label for="mass{{item.id}}">grams</label></td>
+                        <td><a href="/meal_item_delete/{{meal_id}}/{{item.id}}" class="btn btn-danger">Delete</a></td>
+                    </tr>
                 {% endfor %}
-                </ul>
+                </table>
+                <br>
                 <input type="submit" value="Calculate" class="btn btn-success" id="calc" aria-label="Button that works the new values of potassium and other minerals if the mass of a certain fruit has been changed"><br><br>
                 <p>Potassium: {{potassium}} grams</p><br>
                 <p>Calcium: {{calcium}} grams</p><br>
