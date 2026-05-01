@@ -28,6 +28,8 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
 # SECURITY WARNING: don't run with debug turnedos.environ.get("DEBUG_SWITCH") on in production!
 DEBUG = False
 
