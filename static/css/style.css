@@ -24,6 +24,10 @@ can still read the sontent and it looks better */
 #background_meal_update{
     background-image: url(../images/images_for_site/fruit_bowls_background3.png);
 }
+
+#background_home{
+    background-image: url(../images/images_for_site/fruit_bowl_home_page.jpg);
+}
 /* padding4 for spacing out information in a table */
 .padding4{
     padding:5px;

@@ -12,6 +12,13 @@ from django.shortcuts import redirect
 
 # Create your views here.
 
+def home_page(request):
+    context={}
+    return render(
+            request,
+            "home.html",
+            context,
+        )
 @login_required(login_url="/accounts/login/")
 # my_hello
 # by default render the food_add page and if the method is POST render the meal update page

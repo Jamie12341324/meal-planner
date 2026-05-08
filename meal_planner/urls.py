@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from food_adder.views import home_page
 from food_adder.views import my_hello
 from food_adder.views import meal_list
 from food_adder.views import meal_update
@@ -29,7 +30,7 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path('hello/<int:id>', my_hello, name='my_view'),
     path('hello/',meal_create, name="hello"),
-    path('',meal_list, name="hello"),
+    #path('',meal_list, name="hello"),
     path('edit_meal/', my_hello, name='start2'),
     path('meal_list/',meal_list, name="meal_list"),
     path('meal_update/<int:id>',meal_update, name="meal_update"),
@@ -37,4 +38,6 @@ urlpatterns = [
     path('meal_item_delete/<int:meal_id>/<int:meal_item_id>',meal_item_delete, name="food_delete"),
     path('meal_create/',meal_create, name='meal_create'),
     path('meal_create2/<int:meal_id>',meal_create2, name='meal_create2'),
+    path('',home_page,name="home_page"),
+    path('home/',home_page,name="home_page"),
 ]
