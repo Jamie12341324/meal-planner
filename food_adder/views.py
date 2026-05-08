@@ -13,6 +13,8 @@ from django.shortcuts import redirect
 # Create your views here.
 
 @login_required(login_url="/accounts/login/")
+# my_hello
+# by default render the food_add page and if the method is POST render the meal update page
 def my_hello(request,id):
     code_to_name={
         "Strawberry":"14-324",
@@ -23,8 +25,6 @@ def my_hello(request,id):
         "Raspberries":"14-375",
     }
     Meals=Meal.objects.filter(Q(user_id=request.user.id)).values()
-    #Meals=Meal.objects.filter(Q(user_id=request.user.id) & Q(id=id) ).values()
-    
     L2=len(Meals)
     c2=0
     array=[]
@@ -65,43 +65,11 @@ def my_hello(request,id):
             "food_add.html",
             context
         )
+    
 
 @login_required(login_url="/accounts/login/")
-def start_meal(request):
-    if request.method=="POST":
-        meal_item=Meal_Item()
-        meal_item.food_code=request.POST.getlist["example"]
-        meal_item.mass=100
-        meal_item.save()
-    else:
-        # information on passing context into a webpage found on w3schools
-        foods=Food.objects.all().values()
-        context = {
-            "foods":foods
-        }
-        return render(
-            request,
-            "food_add.html",
-            context
-        )
-    
-@login_required(login_url="/accounts/login/")
-def my_view_name(request):
-    if request.method=="POST":
-        foods=Food.objects.all().values()
-        meals=Meal.objects.all().values()
-        context = {
-            "foods":foods,
-            "meals":meals,
-        }
-        # information on passing context into a webpage found on w3schools
-        return render(
-            request,
-            "food_add.html",
-            context
-        )
-    
-@login_required(login_url="/accounts/login/")
+# meal_list
+# renders the meal list page
 def meal_list(request):
     meal_results = Meal.objects.filter(Q(user_id=request.user.id)).values().order_by("id")
     context = {
@@ -111,6 +79,8 @@ def meal_list(request):
     return HttpResponse(template.render(context, request))
 
 @login_required(login_url="/accounts/login/")
+# meal_update
+# renders the meal update page
 def meal_update(request,id):
     meal = Meal.objects.get(id=id)
     meal_name = meal.name
@@ -155,16 +125,24 @@ def meal_update(request,id):
     return HttpResponse(template.render(context, request))
 
 @login_required(login_url="/accounts/login/")
+# meal_delete
+# deletes a meal and then goes back to the meal list page
 def meal_delete(request,id):
     Meal.objects.filter(Q(user_id=request.user.id) & Q(id=id)).delete()
     return redirect("/meal_list")
 
 @login_required(login_url="/accounts/login/")
+# meal_item_delete
+# deletes a meal item then renders th email update page
 def meal_item_delete(request,meal_id,meal_item_id):
     Meal_Item.objects.filter(Q(id=meal_item_id) & Q(meal_id=meal_id)).delete()
     return redirect("/meal_update/"+str(meal_id))
 
 @login_required(login_url="/accounts/login/")
+# meal_create
+# returns you back to the same page (meal_create) if you have not given a name to create a meal with or
+# a meal with that name already exists
+# if you have given a meal name then it is saved and you are sent to the meal list page
 def meal_create(request):
     if request.method == "POST":
         if request.POST["meal_name"] == '':
@@ -188,6 +166,11 @@ def meal_create(request):
         )
     
 @login_required(login_url="/accounts/login/")
+# meal_create2
+# does a similar job to meal_create but it is for renaming a meal instead of creating one
+# returns you back to the same page (meal_create2) if you have not given a name to rename a meal with or
+# a meal with that name already exists
+# if you have given a meal name then it is saved and you are sent to the meal list page
 def meal_create2(request,meal_id):
     meals=Meal.objects.all().values()
     meal=Meal.objects.get(id=meal_id)

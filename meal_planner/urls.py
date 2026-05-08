@@ -17,8 +17,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from food_adder.views import my_hello
-from food_adder.views import start_meal
-from food_adder.views import my_view_name
 from food_adder.views import meal_list
 from food_adder.views import meal_update
 from food_adder.views import meal_delete
@@ -33,7 +31,6 @@ urlpatterns = [
     path('hello/',meal_create, name="hello"),
     path('',meal_list, name="hello"),
     path('edit_meal/', my_hello, name='start2'),
-    path('start_meal/', start_meal, name='start'),
     path('meal_list/',meal_list, name="meal_list"),
     path('meal_update/<int:id>',meal_update, name="meal_update"),
     path('meal_delete/<int:id>',meal_delete, name="meal_delete"),

@@ -1,3 +1,5 @@
+/* standard class for putting most of a page into the middle and giving it a translucent black background with white text so you
+can still read the sontent and it looks better */
 .standard{
     text-align: center;
     margin:auto;
@@ -5,51 +7,34 @@
     background-color: rgba(9, 9, 9, 0.7);
     color:white;
 }
-.meal_names{
-    display: none;
-}
+/* image-sizer class for making images on food add all the same size and making sure they fit on smaller screens with no scroll*/
 .image-sizer{
     max-width:150px;
     max-height:150px;
 }
+/* background_name_meal id for the background image of meal create*/
 #background_name_meal{
     background-image: url(../images/images_for_site/fruit_bowls_background.png);
 }
+/* background_meal_list id for the background image of meal list */
 #background_meal_list{
     background-image: url(../images/images_for_site/fruit_bowls_background2.png);
 }
+/* background_meal_update id for the background image of meal update */
 #background_meal_update{
     background-image: url(../images/images_for_site/fruit_bowls_background3.png);
 }
-#padding1 {
-    margin-top:45px;
-    box-sizing: border-box;
-}
-.padding2{
-    max-width: 50px;
-}
-#padding3{
-    margin-top: 300px;
-}
+/* padding4 for spacing out information in a table */
 .padding4{
     padding:5px;
     margin-bottom:20px;
 }
-.background {
-    background-image: url(../images/fruit_bowl.jpg);
-    margin: auto;
-    min-height: 500px;
-}
+/* meal_names class for a hidden text area which has all the already existing meal 
+names so that I can check if a new meal name already exists*/
 .meal_names{
-    /* dispaly none from w3schools */
+    /* display none from w3schools */
     display: none;
 }
-/* body {
-    background-image: url(../images/fruit_bowl.jpg) ;
-} */
-/* body {
-    background-color: #F9FAFC;
-} */
 
 .brand {
     font-family: Lato, sans-serif;
