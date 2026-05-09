@@ -9,24 +9,24 @@
     <div class="row">
         <!-- col-12 class from bootstrap -->
         <div class="standard col-12">
-        <h1>Name your meal</h1>
+        <h1>Name Your Meal</h1>
         <br>
         <form method="POST">
             {% csrf_token %}
-            <label for="meal_name">Meal name</label>
+            <label for="meal_name">Meal Name</label>
             <input type="text" id="meal_name" name="meal_name" value="{{meal_name}}" aria-label="Name of your new meal to be add to the list of meals">
             <br>
             <br>
             <!-- btn-success classes from bootstrap used for create meal button  -->
             {% if named %}
-                <button type="submit" id="meal_name_buttonb" class="btn btn-success" aria-label="Button that saves the new meal name and keeps any saved information from the old meal name like meal contents">Rename meal</button>
+                <button type="submit" id="meal_name_buttonb" class="btn btn-success" aria-label="Button that saves the new meal name and keeps any saved information from the old meal name like meal contents">Rename Meal</button>
             {% else %}
-                <button type="submit" id="meal_name_button" class="btn btn-success" aria-label="Button the saves a new meal with the typed in name">Create meal</button>
+                <button type="submit" id="meal_name_button" class="btn btn-success" aria-label="Button the saves a new meal with the typed in name">Create Meal</button>
             {% endif %}
             <br>
         </form>
         <br>
-        <a href="/meal_list" class="btn btn-success" aria-label="Button that sends you to the meal list">Go back to meal list</a>
+        <a href="/meal_list" class="btn btn-success" aria-label="Button that sends you to the meal list">Go back to Meal List</a>
         </div>
     </div>
 </div>

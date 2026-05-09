@@ -30,7 +30,6 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path('hello/<int:id>', my_hello, name='my_view'),
     path('hello/',meal_create, name="hello"),
-    #path('',meal_list, name="hello"),
     path('edit_meal/', my_hello, name='start2'),
     path('meal_list/',meal_list, name="meal_list"),
     path('meal_update/<int:id>',meal_update, name="meal_update"),
