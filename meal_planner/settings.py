@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'food_adder',
 ]
 SITE_ID = 1
-LOGIN_REDIRECT_URL = '/hello'
+LOGIN_REDIRECT_URL = '/home'
 LOGOUT_REDIRECT_URL = '/hello'
 
 MIDDLEWARE = [
